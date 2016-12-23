@@ -1,5 +1,19 @@
 <html>
 	<head>
+		<script language="javascript" type="text/javascript">
+        <!--
+			function ajaxUpdate(resources) {
+				var xhttp = new XMLHttpRequest();
+				xhttp.onreadystatechange = function() {
+					if (this.readyState == 4 && this.status == 200) {
+						document.getElementById("DbInfo").innerHTML = this.responseText;
+					}
+				};
+				xhttp.open("GET", resources, true);
+				xhttp.send();
+			}
+      	//-->
+      	</script>
 		<title>A simple Web Application</title>
 	</head>
     <body>
@@ -10,24 +24,12 @@
 				</td>
 			</tr>
 			<tr valign="top">
-				<td width="50%">
+				<td width="20%">
 					This is a simple guide. To be extended<br />
 				</td>
-				<td width="50%" height="200" bgcolor="#eee">
-					<script language="javascript" type="text/javascript">
-           				<!--
-							var xhttp = new XMLHttpRequest();
-							xhttp.onreadystatechange = function() {
-								if (this.readyState == 4 && this.status == 200) {
-									document.getElementById("getDbInfo").innerHTML = this.responseText;
-								}
-							};
-							xhttp.open("GET", "test.txt", true);
-							xhttp.send();
-                			document.write("Hello World!")
-            			//-->
-        			</script>
-					<p id="getDbInfo"></p>
+				<td width="80%" height="200" bgcolor="#eee">
+					<p id="DbInfo"></p>
+					<input type="button" onclick="ajaxUpdate('test.txt')" value="Show Database Information" />
 				</td>
 			</tr>
 		</table>
