@@ -11,7 +11,8 @@ import (
 
 var db *sql.DB
 
-func Server(w http.ResponseWriter, req *http.Request) {
+func SimpleQueryHandler(w http.ResponseWriter, req *http.Request) {
+	// Perform SQL query for a key-value table called "simple" and return results
 	rows, err := db.Query("SELECT id, value FROM simple WHERE 1")
 	if err != nil {
 		log.Fatal(err)
@@ -45,6 +46,8 @@ func main() {
 		log.Fatalf("Error connecting to the mysql database: %s", err)
 	}
 
-	http.HandleFunc("/", Server)
+	http.HandleFunc("/", SimpleQueryHandler)
+
+	// Listen at localhost only to be used by the nginx reverse proxy
 	log.Fatal(http.ListenAndServe("127.0.0.1:8000", nil))
 }

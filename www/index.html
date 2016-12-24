@@ -1,22 +1,24 @@
 <html>
 	<head>
 		<script language="javascript" type="text/javascript">
-        <!--
-			function ajaxUpdate(resources) {
+		<!--
+			function ajaxFetch(resourcesTag, resourceslink) {
 				var xhttp = new XMLHttpRequest();
 				xhttp.onreadystatechange = function() {
 					if (this.readyState == 4 && this.status == 200) {
-						document.getElementById("DbInfo").innerHTML = this.responseText;
+						document.getElementById(resourcesTag).innerHTML = this.responseText;
 					}
 				};
-				xhttp.open("GET", resources, true);
+				xhttp.open("GET", resourceslink, true);
 				xhttp.send();
 			}
-      	//-->
-      	</script>
+		//-->
+		</script>
 		<title>A simple Web Application</title>
 	</head>
-    <body>
+
+	<body>
+		<!-- A better approach for HTML layout is using div tags. -->
 		<table width="100%" border="0">
 			<tr>
 				<td colspan="2" bgcolor="#b5dcb3">
@@ -29,9 +31,9 @@
 				</td>
 				<td width="80%" height="200" bgcolor="#eee">
 					<p id="DbInfo"></p>
-					<input type="button" onclick="ajaxUpdate('../go/test.txt')" value="Show Database Information" />
+					<input type="button" onclick="ajaxFetch('DbInfo', '../go/test.txt')" value="Show Database Information" />
 				</td>
 			</tr>
 		</table>
-    </body>
+	</body>
 </html>
