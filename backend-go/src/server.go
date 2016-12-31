@@ -36,8 +36,8 @@ func main() {
 
 	// No db address or port specified yet. Using default
 	flag.StringVar(&dbUsername, "user", "", "Username of the mysql server")
-	flag.StringVar(&dbPassword, "pass", "", "Username of the mysql server")
-	flag.StringVar(&dbName, "db", "", "Username of the mysql server")
+	flag.StringVar(&dbPassword, "pass", "", "Password for the mysql server account")
+	flag.StringVar(&dbName, "db", "", "Name of the mysql database to use")
 	flag.Parse()
 
 	//A golang db connection pool
