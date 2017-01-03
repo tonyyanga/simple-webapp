@@ -9,13 +9,8 @@
 #include <event.h>
 #include <evhttp.h>
 
+#include "server.h"
 #include "httphandler.h"
-
-struct arguments {
-    char* db_username;
-    char* db_password;
-    char* db_name;
-} env; // shared environmental variables (by CLI arguments)
 
 const char* args_doc = "A simple web application backend implemented by C";
 
@@ -28,11 +23,13 @@ const struct argp_option options[] = {
     {0} // required to end the options array
 };
 
-static int REQUIRED_ARG = 3; //An ugly way to deal with required arguments
+
+static error_t argp_parser(int key, char *arg, struct argp_state *state);
 
 static error_t argp_parser(int key, char *arg, struct argp_state *state) {
     struct arguments *arguments = state -> input;
-
+    
+    // Need error-handling
     switch (key) {
         case 'u':
             arguments -> db_username = arg;
@@ -74,7 +71,7 @@ int main(int argc, char *argv[]) {
     http_server = evhttp_start(http_addr, http_port);
     evhttp_set_gencb(http_server, generic_request_handler, NULL);
 
-    fprintf(stderr, "Server started on port %d\n", http_port);
+    fprintf(stdout, "Server started on port %d\n", http_port);
 
     //eventloop starts
     event_dispatch();
